@@ -1,0 +1,85 @@
+Last login: Fri Mar 11 17:28:57 on ttys011
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+(base) MacBook-Pro-2:LDA model YUQIAO$ python paper.py
+ 14%|████████▍                                                   | 241/1706 [08:52<54:13,  2.22s/it]
+
+ 85%|████████████████████████████████████████████████▋        | 1456/1706 [2:38:15<14:52,  3.57s/it]bad model: 249705
+ 87%|█████████████████████████████████████████████████▍       | 1479/1706 [2:39:57<20:16,  5.36s/it]bad model: 257027
+ 87%|█████████████████████████████████████████████████▊       | 1492/1706 [2:40:43<17:04,  4.79s/it]bad model: 258631
+ 88%|█████████████████████████████████████████████████▉       | 1494/1706 [2:40:52<16:09,  4.57s/it]bad model: 258738
+ 91%|███████████████████████████████████████████████████▌     | 1544/1706 [2:43:21<05:43,  2.12s/it]bad model: 262045
+ 91%|███████████████████████████████████████████████████▉     | 1554/1706 [2:44:02<13:07,  5.18s/it]bad model: 262356
+ 93%|█████████████████████████████████████████████████████    | 1588/1706 [2:45:54<08:55,  4.54s/it]bad model: 263995
+bad model: 264177
+bad model: 264539
+ 94%|█████████████████████████████████████████████████████▎   | 1596/1706 [2:45:58<03:04,  1.68s/it]bad model: 265591
+bad model: 266498
+bad model: 266506
+bad model: 266551
+bad model: 266637
+bad model: 266774
+bad model: 266775
+bad model: 266782
+bad model: 266798
+bad model: 266799
+bad model: 266800
+bad model: 266802
+bad model: 266806
+bad model: 266811
+bad model: 266814
+bad model: 266818
+bad model: 266819
+bad model: 266823
+bad model: 266836
+bad model: 266840
+bad model: 266841
+bad model: 266842
+bad model: 266849
+bad model: 266850
+bad model: 266851
+bad model: 266863
+bad model: 266864
+bad model: 266868
+bad model: 266871
+bad model: 266880
+bad model: 266881
+bad model: 266895
+bad model: 266901
+ 98%|███████████████████████████████████████████████████████▋ | 1668/1706 [2:46:03<00:09,  4.21it/s]bad model: 266910
+bad model: 266925
+bad model: 266933
+bad model: 266941
+bad model: 266948
+bad model: 266954
+bad model: 266961
+bad model: 266974
+bad model: 266980
+bad model: 266984
+bad model: 266989
+bad model: 267013
+bad model: 267023
+bad model: 267027
+bad model: 267035
+bad model: 267039
+bad model: 267047
+bad model: 267048
+bad model: 267049
+bad model: 267063
+bad model: 267073
+bad model: 267093
+bad model: 267103
+bad model: 267106
+bad model: 267116
+bad model: 267128
+bad model: 267139
+bad model: 267142
+bad model: 267145
+bad model: 267157
+bad model: 267165
+bad model: 267176
+bad model: 267183
+100%|█████████████████████████████████████████████████████████| 1706/1706 [2:46:03<00:00,  5.84s/it]
+(base) MacBook-Pro-2:LDA model YUQIAO$ 
