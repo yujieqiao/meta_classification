@@ -266,86 +266,87 @@ loo = LeaveOneOut()
 with shelve.open("yujie-matrices") as meta_matrices:
    
     for meta in tqdm.tqdm(unique_list):
-        row1=[]
-        row2=[]
-        with shelve.open("yujie-specter") as embeddings:
-            for key, value in tqdm.tqdm(embeddings.items()):
-                row1.append(value)  
-                row2.append(check_meta[(key,meta)])
+        if str(meta) not in meta_matrices:
+            row1=[]
+            row2=[]
+            with shelve.open("yujie-specter") as embeddings:
+                for key, value in tqdm.tqdm(embeddings.items()):
+                    row1.append(value)  
+                    row2.append(check_meta[(key,meta)])
 
 
-        assert(len(row2) == len(row1) == 1568)
+            assert(len(row2) == len(row1) == 1568)
 
-        #print(row1[57])
+            #print(row1[57])
 
-        X_all=np.array(row1)
-        y_all=np.array(row2)
-
-
-# # Regular spliting w. train/test sets
-# X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=0.3, random_state=0)
+            X_all=np.array(row1)
+            y_all=np.array(row2)
 
 
-# fit_start = time.perf_counter()
-# #gnb = GaussianNB()
-# adaboo = AdaBoostClassifier(n_estimators=100, random_state=0)
-
-# y_pred = adaboo.fit(X_train, y_train).predict(X_test)
-# print(f"fit time: {time.perf_counter() - fit_start} seconds")
-# print("Number of mislabeled points out of a total %d points : %d" % (X_test.shape[0], (y_test != y_pred).sum()))
+            # # Regular spliting w. train/test sets
+            # X_train, X_test, y_train, y_test = train_test_split(X_all, y_all, test_size=0.3, random_state=0)
 
 
-        # confusion_mtx=np.zeros((2,2))
-        # for m,n in zip(y_test, y_pred):
-        #     if m==1 and n==1:
-        #         confusion_mtx[0][0]+=1
-        #     elif m==1 and n==0:
-        #         confusion_mtx[1][0]+=1
-        #     elif m==0 and n==1:
-        #         confusion_mtx[0][1]+=1
-        #     else:
-        #         confusion_mtx[1][1]+=1
-
-        # print("adaboo")
-        # print(confusion_mtx)
-
-
-        # Leave one out CV
-        loo = LeaveOneOut()
-        confusion_mtx=np.zeros((2,2))
-        for train_index, test_index in tqdm.tqdm(loo.split(X_all)):
-            # print("TRAIN:", train_index, "TEST:", test_index)
-            X_train, X_test = X_all[train_index], X_all[test_index]
-            y_train, y_test = y_all[train_index], y_all[test_index]
-            # print(X_train, X_test, y_train, y_test)
-            fit_start = time.perf_counter()
-            gnb = GaussianNB()
-            #neigh = KNeighborsClassifier(n_neighbors=3)
+            # fit_start = time.perf_counter()
+            # #gnb = GaussianNB()
             # adaboo = AdaBoostClassifier(n_estimators=100, random_state=0)
-            # logireg = LogisticRegression(random_state=0)
 
-            y_pred = gnb.fit(X_train, y_train).predict(X_test)
+            # y_pred = adaboo.fit(X_train, y_train).predict(X_test)
             # print(f"fit time: {time.perf_counter() - fit_start} seconds")
             # print("Number of mislabeled points out of a total %d points : %d" % (X_test.shape[0], (y_test != y_pred).sum()))
-            if y_test==1 and y_pred==1:
-                confusion_mtx[0][0]+=1
-            elif y_test==1 and y_pred==0:
-                confusion_mtx[1][0]+=1
-            elif y_test==0 and y_pred==1:
-                confusion_mtx[0][1]+=1
-                # with shelve.open("yujie-specter") as embeddings:
-                #     for key, value in embeddings.items():
-                #         if (row1[int(test_index)]==value).all()==True:
-                #             print(key)
-
-            else:
-                confusion_mtx[1][1]+=1
-
-        #print("gaussian")
-        meta_matrices[str(meta)]=confusion_mtx
 
 
-       
+            # confusion_mtx=np.zeros((2,2))
+            # for m,n in zip(y_test, y_pred):
+            #     if m==1 and n==1:
+            #         confusion_mtx[0][0]+=1
+            #     elif m==1 and n==0:
+            #         confusion_mtx[1][0]+=1
+            #     elif m==0 and n==1:
+            #         confusion_mtx[0][1]+=1
+            #     else:
+            #         confusion_mtx[1][1]+=1
 
-with shelve.open("yujie-matrices") as meta_matrices:    
-    print(meta_matrices)
+            # print("adaboo")
+            # print(confusion_mtx)
+
+
+            # Leave one out CV
+            loo = LeaveOneOut()
+            confusion_mtx=np.zeros((2,2))
+            for train_index, test_index in tqdm.tqdm(loo.split(X_all)):
+                # print("TRAIN:", train_index, "TEST:", test_index)
+                X_train, X_test = X_all[train_index], X_all[test_index]
+                y_train, y_test = y_all[train_index], y_all[test_index]
+                # print(X_train, X_test, y_train, y_test)
+                fit_start = time.perf_counter()
+                gnb = GaussianNB()
+                #neigh = KNeighborsClassifier(n_neighbors=3)
+                # adaboo = AdaBoostClassifier(n_estimators=100, random_state=0)
+                # logireg = LogisticRegression(random_state=0)
+
+                y_pred = gnb.fit(X_train, y_train).predict(X_test)
+                # print(f"fit time: {time.perf_counter() - fit_start} seconds")
+                # print("Number of mislabeled points out of a total %d points : %d" % (X_test.shape[0], (y_test != y_pred).sum()))
+                if y_test==1 and y_pred==1:
+                    confusion_mtx[0][0]+=1
+                elif y_test==1 and y_pred==0:
+                    confusion_mtx[1][0]+=1
+                elif y_test==0 and y_pred==1:
+                    confusion_mtx[0][1]+=1
+                    # with shelve.open("yujie-specter") as embeddings:
+                    #     for key, value in embeddings.items():
+                    #         if (row1[int(test_index)]==value).all()==True:
+                    #             print(key)
+
+                else:
+                    confusion_mtx[1][1]+=1
+
+            #print("gaussian")
+            meta_matrices[str(meta)]=confusion_mtx
+
+
+        
+
+    with shelve.open("yujie-matrices") as meta_matrices:    
+        print(meta_matrices)
